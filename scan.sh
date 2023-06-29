@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo egrep "Invalid user" /var/log/auth.log | cut -c 69-77
+sudo cat /var/log/auth.log |grep "Invalid user" | cut -c 40-| grep -E -o "[^^][0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}"
