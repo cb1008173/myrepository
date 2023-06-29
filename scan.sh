@@ -15,3 +15,7 @@ country=$(sudo geoiplookup $ip | cut -c 24-)
 echo "$date"
 echo "$ip"
 echo "$country"
+
+
+#finally, this information needs to be APPENDED to a file called unauthorized.log which should be located, something like:
+# >> /var/webserver_log/unauthorized.log
