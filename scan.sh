@@ -18,7 +18,9 @@ echo "$country"
 
 
 #finally, this information needs to be APPENDED to a file called unauthorized.log which should be located, something like:
-# >> /var/webserver_log/unauthorized.log echo "-------this separates my code------"
+# >> /var/webserver_log/unauthorized.log echo "
+
+ echo "-------this separates my code------"
 
  while IFS= read -r line
  do
@@ -26,8 +28,10 @@ echo "$country"
      ip=$(echo "$line" | cut -c 39-| grep -E -o "[^^][0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}"|tr -d '[:blank:]')
      date=$(echo "$line" | cut -c 1-15)
      country=$(sudo geoiplookup "$ip" | cut -c 24-)
-    if ! [ -z "$ip" ] ; then
-         echo "$ip $country $date"
+     if ! [ -z "$ip" ] ; then
+         if !  grep "$date" /var/webserver_log/unauthorized.log ; then   
+             echo "$ip $country $date" >> /var/webserver_log/unauthorized.log
+         fi
      fi
  done <<< "$myvar"
 
