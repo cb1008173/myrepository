@@ -2,7 +2,7 @@
 changes=$(diff /var/webserver_monitor/unauthorized.log /var/webserver_monitor/unauthorized2.log)
 
 if [ -z "$changes" ] ; then
-    echo "no changes"
+    mail -s "changes to unauthorized.log" cb1008175@wcupa.edu <<< "no unauthorized access"
 else
-    echo "$changes"
+    mail -s "changes to unauthorized.log" cb1008175@wcupa.edu <<< "$changes"
 fi
